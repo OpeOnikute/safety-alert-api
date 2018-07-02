@@ -8,13 +8,7 @@ module.exports = {
         return 'Sorry, We could not find this ' + param + '.';
     },
     paramAlreadyExists: (param, paramName) => {
-        let response = 'This ' + param + ' already exists.';
-
-        if (paramName) {
-            response += (': ' + paramName);
-        }
-
-        return response;
+        return `Sorry, this ${param} ${paramName || ''} already exists.`;
     },
     noParamFound: (param) => {
         return 'No ' + param + ' was found';
@@ -22,5 +16,6 @@ module.exports = {
     errorUpdating: 'An error occurred while updating. Please try again',
     errorSaving: (param) => {
         return 'Sorry, we could not save this ' + param;
-    }
+    },
+    invalidParams: 'Invalid parameter(s)'
 };
