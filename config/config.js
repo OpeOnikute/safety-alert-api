@@ -15,11 +15,11 @@ module.exports = {
             port: 5000
         },
         staging: {
-            url: `mongodb://${dbUser}:${dbPassword}@${dbBase}`,
+            url: process.env.MONGODB_URI || `mongodb://${dbUser}:${dbPassword}@${dbBase}`,
             port: 5300
         },
         production: {
-            url: `mongodb://${dbUser}:${dbPassword}@${dbBase}`,
+            url: process.env.MONGODB_URI || `mongodb://${dbUser}:${dbPassword}@${dbBase}`,
             port: 5300
         }
     },
