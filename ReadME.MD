@@ -1,22 +1,16 @@
-# Node ExpressJS API Starter
-Lightweight starter for a Node JSON API.
+# Safety Alert API
+This is the server-side application for the safety alert project.
 
-## Features
-- ES6 Syntax
-- JSON Requests (POST, PUT, GET, DELETE)
-- Security (Helmet, Cors, Endpoint data validation)
-- Mongoose DB (Sample model)
-- Code constants
-- DB Config support
-- .env file support
-
-## How to install
+## How to run
 - Clone the repo.
-- In your command prompt or console, enter `npm install`
-- Set up your local Mongo database (Create a user and password for the db 't-api').
-- Edit the .env file to include your database user and password.
-- Run `npm run dev` to create a hot-reload server.
+- Run `npm install`
+- Setup your local mongo db with the db name: safety-alert
+- Modify the env file (See below)
 
-## Contributions
-- Create a separate branch in your fork.
-- Push to that branch, and create a PR to the `dev` branch of this repo.
+## Env File
+When running on your localhost, modify the .env file like so:
+```
+DB_USER=opeo
+DB_PASSWORD=root
+DB_BASE=localhost/safety-alert
+```
