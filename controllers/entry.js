@@ -75,11 +75,6 @@ module.exports = {
         Entry.find({})
             .exec()
             .then((entries) => {
-
-                if (!entries.length) {
-                    return utils.sendError(res, responseMessages.noParamFound('entry'), responseCodes.noParamFound, 400);
-                }
-
                 utils.sendSuccess(res, entries);
             })
             .catch((err) => {
