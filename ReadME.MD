@@ -14,3 +14,6 @@ DB_USER=opeo
 DB_PASSWORD=root
 DB_BASE=localhost/safety-alert
 ```
+
+## TODO
+Send out push notification to all subscribed people on new entry.

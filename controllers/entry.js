@@ -1,5 +1,6 @@
+import { sendNotification } from "../handlers/pushHandler";
 const Entry = require('../models/entry');
-
+const Push = require('../models/pushSubscription');
 const utils = require('../lib/utils');
 
 const baseController = require('../controllers/base');
@@ -9,6 +10,41 @@ const responseCodes = require('../constants/responseCodes');
 const entryHandler = require('../handlers/entryHandler');
 
 module.exports = {
+
+    /**
+     * Endpoint to create a new entry
+     * @param req
+     * @param res
+     * @returns {*}
+     */
+    createPushNotification: (req, res) => {
+
+        let params = req.body;
+
+        // req params validation for required fields
+        req.checkBody('endpoint', 'The endpoint provided is invalid').isText();
+        req.checkBody('expirationTime', 'The expirationTime provided is invalid').isText();
+        req.keys('keys', 'keys provided is invalid').isObject();
+
+        // validate entry input
+        req
+            .getValidationResult()
+            .then(result => {
+
+                if (!result.isEmpty()) {
+                    return utils.sendError(res, responseMessages.invalidParams, responseCodes.invalidParams, 400, result.array());
+                }
+
+                const push = new Push({
+                    endpoint: params.endpoint,
+                    expirationTime: params.expirationTime,
+                    keys: params.keys
+                });
+
+                baseController.saveModelObj(res, push, responseMessages.paramsNotCreated('push'),
+                    responseCodes.paramsNotCreated, true, true);
+            });
+    },
 
     /**
      * Endpoint to create a new entry
@@ -49,6 +85,8 @@ module.exports = {
                         location: params.location,
                         state: params.state
                     });
+
+                    sendNotification(res, 'New Entry', 'A new entry was just created. Come check it out!');
 
                     baseController.saveModelObj(res, entry, responseMessages.paramsNotCreated('entry'),
                         responseCodes.paramsNotCreated, true, true);

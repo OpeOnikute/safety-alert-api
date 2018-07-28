@@ -14,6 +14,8 @@ router.post('/users', userController.createUser);
 router.put('/users', userController.updateUser);
 router.get('/users/:userId', userController.getUserById);
 
+router.post('/push', entryController.createPushNotification);
+
 router.get('/entry', entryController.getAllEntries);
 router.post('/entry', entryController.createEntry);
 router.put('/entry/:entryId', entryController.updateEntry);
