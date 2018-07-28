@@ -14,7 +14,13 @@ webpush.setVapidDetails(
 
 module.exports.sendNotification = function(res, title, body) {
 
-    getPushSubscriptions.then(results => {
+    getPushSubscriptions((err, results) => {
+
+        if (err) {
+            console.log(err);
+            return utils.sendError(res, err || 'Unknown issue.');
+        }
+
         const notificationPayload = {
             "notification": {
                 "title": title,
@@ -39,22 +45,15 @@ module.exports.sendNotification = function(res, title, body) {
                 utils.sendError(res, err || 'Unknown issue.');
                 console.error("Error sending notification, reason: ", err);
             });
+    })
+};
 
-    }).catch(err => {
-        utils.sendError(res, err || 'Unknown issue.');
-        console.log(err);
-    });
-}
-
-function getPushSubscriptions () {
-
-    return new Promise((resolve, reject) => {
-        Push.find({})
-            .exec()
-            .then(results => {
-                resolve(results)
-            }).catch(err => {
-                reject(err);
-            })
-    });
+function getPushSubscriptions (cb) {
+    Push.find({})
+        .exec()
+        .then(results => {
+            cb(null, results)
+        }).catch(err => {
+            cb(err, null);
+        })
 }
