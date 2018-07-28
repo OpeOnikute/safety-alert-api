@@ -23,7 +23,6 @@ module.exports = {
 
         // req params validation for required fields
         req.checkBody('endpoint', 'The endpoint provided is invalid').isText();
-        req.checkBody('expirationTime', 'The expirationTime provided is invalid').isText();
         req.checkBody('keys', 'keys provided is invalid').isObject();
 
         // validate entry input
