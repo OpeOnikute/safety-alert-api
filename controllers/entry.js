@@ -1,4 +1,4 @@
-import { sendNotification } from "../handlers/pushHandler";
+const sendNotification = require('../handlers/pushHandler').sendNotification;
 const Entry = require('../models/entry');
 const Push = require('../models/pushSubscription');
 const utils = require('../lib/utils');

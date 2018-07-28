@@ -12,7 +12,7 @@ webpush.setVapidDetails(
     vapidKeys.privateKey
 );
 
-export function sendNotification(res, title, body) {
+module.exports.sendNotification = function(res, title, body) {
 
     getPushSubscriptions.then(results => {
         const notificationPayload = {
